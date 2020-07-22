@@ -83,7 +83,7 @@ def anonymize_data(df, field):
 
 
  
-
+#first method for language detect
 
 
 def lang_detect(data):
@@ -105,46 +105,25 @@ def lang_detect(data):
     data = data.drop(li)
     return data
 
-data = dataframe('/Users/psreekar/Desktop/sentiment data /2020-06-15+16_21_09+-+email_source.csv12')
+data = dataframe('Specifity the csv file path')
 fields = ['subject','Description']
 
 for field in fields:
     field = field.strip()
     df = anonymize_data(data, field)
-#df = lang_detect(df)
     
-df.to_csv('/Users/psreekar/Desktop/sentiment data /Data_8.csv', index=False)
+df.to_csv('Path to store file', index=False)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#Second method for language detection we are using Textblob package
 
 from textblob import TextBlob
 
-d = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_2.csv')
+d = pd.read_csv('Specifity the csv file path')
 Blob = []
 list1 = data['Description'].tolist()
 for text in list1:
     blob = TextBlob(str(text))
     temp = blob.noun_phrases
-    print(temp)
-#    if type(temp).__name__ == 'float':
-#        pass
-#    else:
-#        Blob.extend(text)
     try:
         Blob.extend(temp)
     except:
@@ -166,29 +145,6 @@ def dta(data):
     data_f = data[data['subject'] != 'Transaction Response']
     data_f1 =  data_f[data_f['Language'] == 'en']
     d = data_f1.sample(n=20000)
-    d.to_csv('/Users/psreekar/Desktop/sentiment data /Data.csv', index=False)
 
-d = d.replace(Blob,'X'*7)
-d = d.sample(n=20000)
-
-
-
-
-
-import pandas as pd
-
-
-data1 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_1.csv')
-data2 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_2.csv')
-data3 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_3.csv')
-data4 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_4.csv')
-data5 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_5.csv')
-data6 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_6.csv')
-data7 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_7.csv')
-data8 = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data_8.csv')
-
-frames = [data1,data2,data3,data4,data5,data6,data7,data8]
-Data = pd.concat(frames)
-
-
-D = pd.read_csv('/Users/psreekar/Desktop/sentiment data /Data.csv')
+    # Give the path or location to store the dataframe in csv
+    d.to_csv('Path to store file', index=False)
