@@ -105,14 +105,7 @@ def lang_detect(data):
     data = data.drop(li)
     return data
 
-data = dataframe('Specifity the csv file path')
-fields = ['subject','Description']
 
-for field in fields:
-    field = field.strip()
-    df = anonymize_data(data, field)
-    
-df.to_csv('Path to store file', index=False)
 
 #Second method for language detection we are using Textblob package
 
@@ -145,6 +138,17 @@ def dta(data):
     data_f = data[data['subject'] != 'Transaction Response']
     data_f1 =  data_f[data_f['Language'] == 'en']
     d = data_f1.sample(n=20000)
+    return data_f1
 
-    # Give the path or location to store the dataframe in csv
-    d.to_csv('Path to store file', index=False)
+
+
+
+data = dataframe('Specifity the csv file path')
+fields = ['subject','Description']
+
+for field in fields:
+    field = field.strip()
+    df = anonymize_data(data, field)
+df = dta(df)
+
+df.to_csv('Path to store file', index=False)
